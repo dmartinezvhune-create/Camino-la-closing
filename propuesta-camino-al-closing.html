@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alianza Camino Al Closing</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: landing de propuesta en scroll continuo. Hero a pantalla ancha con sello dorado, barra de secciones fija, bloques alternos en VOID con una sola nota dorada por bloque; la carta de acuerdo como documento claro al final */
+:root{
+  color-scheme:dark;
+  --void:#060606; --void-2:#0C0C0B; --panel:#121110; --panel-2:#191714; --line:#2a2620; --line-2:#3d362a;
+  --ivory:#F0EADD; --muted:#A49C8C; --faint:#6E675B;
+  --gold:#C9A84C; --gold-2:#E4C978; --gold-deep:#8A6D22; --gold-soft:rgba(201,168,76,.10);
+  --paper:#FBF8F1; --ink:#1A1813; --ink-2:#5A544A;
+  --f-display:"Cormorant Garamond", "Cinzel", Georgia, serif;
+  --f-body:"DM Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"DM Mono", ui-monospace, Menlo, monospace;
+  --gut-l:max(20px, env(safe-area-inset-left, 0px));
+  --gut-r:max(20px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+html{background:var(--void);scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--void);color:var(--ivory);font-family:var(--f-body);font-size:16.5px;line-height:1.65;text-align:left;hyphens:none;-webkit-hyphens:none}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--void)}
+a{color:var(--gold-2)}
+.in{max-width:1120px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.k{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;text-wrap:balance;margin:0}
+p{margin:0 0 14px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(6,6,6,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .in{display:flex;align-items:center;gap:20px;height:58px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:700;letter-spacing:.2em;font-size:14px;white-space:nowrap;text-decoration:none;color:var(--ivory)}
+.brand svg{width:24px;height:24px;flex:none}
+.brand .s{color:var(--gold)}
+.bar nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:8px 10px;white-space:nowrap;border-radius:2px}
+.bar nav a:hover,.bar nav a.on{color:var(--ivory)}
+.bar nav a.on{box-shadow:inset 0 -2px 0 var(--gold)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::after{content:"";position:absolute;right:-12%;top:-30%;width:70vw;max-width:900px;aspect-ratio:1;background:radial-gradient(closest-side,rgba(201,168,76,.13),transparent 70%);pointer-events:none}
+.hero .in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:40px;align-items:center;padding-block:72px 64px}
+.status{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-2);border-radius:999px;padding:7px 14px 7px 10px;font-size:13px;color:var(--muted);margin-bottom:26px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,168,76,.18)}
+.hero h1{font-size:clamp(46px,8vw,104px);line-height:.95;letter-spacing:-.01em;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--gold-2);font-weight:500}
+.hero .lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:58ch;margin:0 0 30px}
+.hero .lede b{color:var(--ivory);font-weight:500}
+.pair{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-family:var(--f-display);font-size:22px}
+.pair span{white-space:nowrap}
+.pair .x{color:var(--gold);font-family:var(--f-mono);font-size:14px}
+.seal{width:100%;max-width:340px;justify-self:end}
+.seal svg{width:100%;height:auto;display:block}
+.seal .hex{stroke-dasharray:400;stroke-dashoffset:0}
+.seal .chk{stroke-dasharray:80;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){
+  .seal .hex{animation:draw 2.2s ease-out both}
+  .seal .chk{animation:draw2 1s .9s ease-out both}
+  .seal .ring{animation:spin 60s linear infinite;transform-origin:120px 120px}
+}
+@keyframes draw{from{stroke-dashoffset:400}}
+@keyframes draw2{from{stroke-dashoffset:80}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);position:relative;z-index:1}
+.stats div{padding:22px var(--gut-r) 22px 0;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--f-display);font-size:34px;line-height:1;color:var(--ivory);font-weight:600}
+.stats span{font-size:13px;color:var(--muted)}
+
+/* secciones */
+section.blk{padding-block:96px}
+section.blk.alt{background:var(--void-2);border-block:1px solid var(--line)}
+.head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px 56px;align-items:end;margin-bottom:48px}
+.head h2{font-size:clamp(34px,5vw,60px);line-height:1.02;margin-top:12px}
+.head p{color:var(--muted);margin:0;max-width:56ch;font-size:17px}
+
+/* encaje */
+.fit{display:grid;grid-template-columns:minmax(0,1fr) 120px minmax(0,1fr);align-items:stretch}
+.side{background:var(--panel);border:1px solid var(--line);padding:30px;border-radius:3px}
+.side h3{font-size:32px;line-height:1.05;margin:10px 0 12px}
+.side p{color:var(--muted);margin:0}
+.side p b{color:var(--ivory);font-weight:500}
+.side.cs{border-color:var(--gold)}
+.bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--gold);font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.bridge svg{width:72px;height:24px}
+.quote{margin-top:44px;border-left:2px solid var(--gold);padding-left:24px;max-width:64ch}
+.quote p{font-family:var(--f-display);font-size:clamp(24px,2.8vw,32px);line-height:1.25;margin:0}
+.principles{list-style:none;margin:52px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.principles li{background:var(--void);padding:22px}
+.principles b{display:block;font-weight:600;margin-bottom:6px}
+.principles span{color:var(--muted);font-size:15px}
+section.alt .principles li{background:var(--void-2)}
+
+/* recorrido */
+.journey{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative}
+.journey::before{content:"";position:absolute;left:0;right:0;top:27px;height:1px;background:linear-gradient(90deg,var(--gold),var(--line-2))}
+.jstep{position:relative;padding-right:22px}
+.jstep .dot{width:56px;height:56px;border-radius:50%;border:1px solid var(--gold);background:var(--void);display:grid;place-items:center;font-family:var(--f-display);font-size:26px;color:var(--gold-2);position:relative;z-index:1;margin-bottom:18px}
+section.alt .jstep .dot{background:var(--void-2)}
+.jstep .who{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.jstep .who.cs{color:var(--gold)}
+.jstep h3{font-size:24px;margin:6px 0 6px}
+.jstep p{color:var(--muted);font-size:15px;margin:0}
+.wins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:56px}
+.win{border-top:1px solid var(--gold);padding-top:16px}
+.win p{color:var(--muted);font-size:15.5px;margin:8px 0 0}
+.win p b{color:var(--ivory);font-weight:500}
+.note{margin-top:32px;padding:18px 22px;background:var(--gold-soft);border:1px solid rgba(201,168,76,.28);border-radius:3px;color:var(--ivory);font-size:15.5px;max-width:86ch}
+
+/* líneas */
+.lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.line{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:28px;display:flex;flex-direction:column;gap:12px;position:relative;transition:border-color .25s}
+.line:hover{border-color:var(--line-2)}
+.line.lead{grid-column:1/-1;display:grid;grid-template-columns:110px minmax(0,1fr) auto;align-items:start;gap:26px;border-color:var(--gold)}
+.line .L{font-family:var(--f-display);font-weight:700;font-size:64px;line-height:.8;color:var(--gold)}
+.line h3{font-size:27px;line-height:1.1}
+.line p{color:var(--muted);font-size:15.5px;margin:0}
+.neg{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);border:1px solid var(--gold-deep);padding:6px 10px;border-radius:2px;white-space:nowrap}
+.neg::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.line .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+
+/* compromisos */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:18px 20px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--panel)}
+td{color:var(--muted)}
+td:first-child{color:var(--ivory);font-weight:600;width:18%}
+.req{margin-top:18px;color:var(--muted);font-size:14.5px}
+.req b{color:var(--ivory);font-weight:500}
+
+/* más adelante */
+.later{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.lt{border:1px solid var(--line);border-radius:3px;padding:24px;background:var(--panel)}
+.lt.big{grid-column:span 2;border-color:var(--line-2);background:linear-gradient(135deg,var(--panel-2),var(--panel))}
+.lt h3{font-size:24px;margin:8px 0 8px}
+.lt p{color:var(--muted);font-size:15px;margin:0}
+.lt p b{color:var(--ivory);font-weight:500}
+
+/* alcance */
+.scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sc{border-radius:3px;padding:30px;border:1px solid var(--line)}
+.sc.yes{border-color:var(--gold);background:var(--gold-soft)}
+.sc h3{font-size:28px;margin-bottom:14px}
+.sc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.sc li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;color:var(--muted);font-size:15.5px}
+.sc li b{color:var(--ivory);font-weight:500}
+.sc.yes li::before{content:"✓";color:var(--gold-2);font-weight:600}
+.sc.no li::before{content:"—";color:var(--faint)}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;counter-reset:s}
+.st{border-top:2px solid var(--line-2);padding-top:16px}
+.st.done{border-top-color:var(--gold)}
+.st.now{border-top-color:var(--gold-2)}
+.st .when{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.st.done .when,.st.now .when{color:var(--gold)}
+.st h3{font-size:22px;line-height:1.1;margin:8px 0 8px}
+.st p{color:var(--muted);font-size:14.5px;margin:0}
+.st.now{position:relative}
+.st.now .when::after{content:" · tu turno";color:var(--gold-2)}
+
+/* carta */
+.letter{max-width:840px}
+.agnote{color:var(--muted);margin:0 0 22px;max-width:70ch}
+.agreement{background:var(--paper);color:var(--ink);border-radius:3px;padding:clamp(24px,5vw,60px);font-size:15.5px;line-height:1.72;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.agreement .t{font-family:var(--f-display);font-size:34px;font-weight:700;margin:0;line-height:1.1}
+.agreement .s{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin:8px 0 28px}
+.agreement h4{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin:28px 0 10px;font-weight:500}
+.agreement p{margin:0 0 12px;color:var(--ink)}
+.agreement ol{margin:0 0 12px;padding-left:20px}
+.agreement .cl b{font-weight:600}
+.ph{background:#F3E6BF;border-bottom:1px dashed var(--gold-deep);padding:0 3px;border-radius:2px;color:var(--ink)}
+.ph:empty::before{content:attr(data-p);color:var(--gold-deep)}
+.sign{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:44px}
+.sign div{border-top:1px solid #8B8576;padding-top:10px;font-size:14px;color:var(--ink-2)}
+.sign b{color:var(--ink);display:block}
+
+/* cierre */
+.close{padding-block:110px 90px;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.close::before{content:"";position:absolute;left:-20%;bottom:-60%;width:80vw;max-width:900px;aspect-ratio:1;background:radial-gradient(closest-side,rgba(201,168,76,.12),transparent 70%);pointer-events:none}
+.close .in{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:48px;align-items:end}
+.close h2{font-size:clamp(38px,6vw,76px);line-height:1}
+.close h2 em{font-style:italic;color:var(--gold-2);font-weight:500}
+.close p{color:var(--muted);font-size:17.5px;max-width:52ch;margin:22px 0 0}
+.card{border:1px solid var(--gold);border-radius:3px;padding:26px;background:var(--void)}
+.card .name{font-family:var(--f-display);font-size:26px;margin:10px 0 2px}
+.card .role{color:var(--muted);font-size:14px;margin-bottom:16px}
+.card .ln{font-family:var(--f-mono);font-size:14px;display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--ivory);user-select:all}
+.card a.ln{color:var(--gold-2);text-decoration:none}
+footer{border-top:1px solid var(--line);padding-block:22px 40px;color:var(--faint);font-size:13px}
+footer .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* aparición suave desde un estado visible */
+@media (prefers-reduced-motion:no-preference){
+  .rv{transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s}
+  .js .rv.pre{transform:translateY(18px);opacity:.35}
+}
+
+@media (max-width:980px){
+  .hero .in{grid-template-columns:minmax(0,1fr)}
+  .seal{max-width:200px;justify-self:start;order:-1}
+  .head{grid-template-columns:minmax(0,1fr)}
+  .journey{grid-template-columns:minmax(0,1fr);gap:26px}
+  .journey::before{left:27px;right:auto;top:0;bottom:0;width:1px;height:auto;background:linear-gradient(180deg,var(--gold),var(--line-2))}
+  .jstep{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 18px;padding:0}
+  .jstep .dot{grid-row:span 3;margin:0}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 16px}
+  .later{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .close .in{grid-template-columns:minmax(0,1fr)}
+  .principles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .bar nav{display:none}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .stats div{padding-left:0}
+  .fit{grid-template-columns:minmax(0,1fr)}
+  .bridge{flex-direction:row;padding:14px 0}
+  .bridge svg{transform:rotate(90deg)}
+  .lines,.wins,.scope,.later,.principles,.sign{grid-template-columns:minmax(0,1fr)}
+  .line.lead{grid-template-columns:minmax(0,1fr);gap:12px}
+  .line .L{font-size:48px}
+  .lt.big{grid-column:auto}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  section.blk{padding-block:68px}
+}
+
+/* Justificado sin estirar: solo en párrafos con anchura de línea suficiente (≥ ~50 caracteres),
+   sin guiones, con el último renglón a la izquierda y reparto de espacios solo entre palabras */
+.jt,.hero .lede,.head p,.side p,.quote p,.principles span,.jrow p,.win p,.note,.line p,.req,.sc li span,.srow p,.lt p,.agnote,.agreement p,.agreement li,.close p{
+  text-align:justify;text-justify:inter-word;text-align-last:left;hyphens:none;-webkit-hyphens:none;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
+td,th{text-align:left}
+
+/* recorrido en filas anchas */
+.jlist{display:flex;flex-direction:column;border-left:1px solid var(--line-2);margin-left:27px}
+.jrow{position:relative;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:8px 48px;padding:0 0 34px 54px}
+.jrow:last-child{padding-bottom:0}
+.jrow .dot{position:absolute;left:-28px;top:-6px;width:56px;height:56px;border-radius:50%;border:1px solid var(--gold);background:var(--void-2);display:grid;place-items:center;font-family:var(--f-display);font-size:26px;color:var(--gold-2)}
+.jrow .who{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.jrow .who.cs{color:var(--gold)}
+.jrow h3{font-size:27px;line-height:1.1;margin:6px 0 0}
+.jrow p{color:var(--muted);margin:0;font-size:16px;max-width:62ch;padding-top:6px}
+
+/* beneficios en filas */
+.wins2{display:flex;flex-direction:column;gap:0;margin-top:56px;border-top:1px solid var(--line)}
+.wrow{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:8px 48px;padding:20px 0;border-bottom:1px solid var(--line)}
+.wrow p{color:var(--muted);margin:0;max-width:66ch}
+.wrow p b{color:var(--ivory);font-weight:500}
+
+/* pasos en filas */
+.slist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.srow{display:grid;grid-template-columns:150px minmax(0,300px) minmax(0,1fr);gap:8px 40px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.srow .when{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.srow h3{font-size:25px;line-height:1.1}
+.srow p{color:var(--muted);margin:0;max-width:62ch}
+.srow.done .when,.srow.now .when{color:var(--gold)}
+.srow.done h3{color:var(--muted)}
+.srow.now{background:linear-gradient(90deg,var(--gold-soft),transparent 70%);padding-left:16px;margin-left:-16px;border-left:2px solid var(--gold)}
+.srow.now .when::after{content:" · tu turno";color:var(--gold-2)}
+
+/* rejillas más anchas para que cada párrafo tenga línea suficiente */
+.principles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.principles li{padding:24px 28px}
+.later{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lt.big{grid-column:1/-1}
+.lt{padding:28px}
+.lines .line{padding:30px 32px}
+.hero .lede{max-width:60ch}
+.head{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.head p{max-width:60ch}
+
+@media (max-width:980px){
+  .jrow,.wrow{grid-template-columns:minmax(0,1fr)}
+  .srow{grid-template-columns:120px minmax(0,1fr)}
+  .srow p{grid-column:2}
+}
+@media (max-width:720px){
+  .lines{grid-template-columns:minmax(0,1fr)}
+  .principles,.later{grid-template-columns:minmax(0,1fr)}
+  .srow{grid-template-columns:minmax(0,1fr)}
+  .srow p{grid-column:1}
+  .jrow{padding-left:44px}
+  .jlist{margin-left:22px}
+  .jrow .dot{left:-23px;width:46px;height:46px;font-size:22px}
+  body{font-size:16px}
+  .lines .line,.lt,.side,.sc{padding:24px 22px}
+  .principles li{padding:20px 22px}
+}
+
+.hero .in{grid-template-columns:minmax(0,1fr)}
+.hero h1{max-width:14ch}
+
+/* cifras de portada */
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:0;margin-top:8px}
+.stats div{padding:26px 28px 30px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.stats div:first-child{padding-left:0}
+.stats div:last-child{padding-right:0;border-right:0}
+.stats b{font-family:var(--f-display);font-size:clamp(34px,3.6vw,46px);line-height:1;font-weight:600;color:var(--gold-2);font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1;letter-spacing:-.01em;white-space:nowrap}
+.stats span{display:block;font-size:14px;line-height:1.45;color:var(--muted);max-width:22ch}
+@media (max-width:720px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats div{padding:22px 18px 24px}
+  .stats div:nth-child(odd){padding-left:0}
+  .stats div:nth-child(even){padding-right:0;border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .stats b{font-size:34px}
+}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="in">
+    <a class="brand" href="#inicio" aria-label="Closer Search, inicio">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="none" stroke="#C9A84C" stroke-width="2.4"/><polyline points="13,20 18,25 28,15" fill="none" stroke="#C9A84C" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>CLOSER <span class="s">SEARCH</span></span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#encaje">El encaje</a>
+      <a href="#recorrido">Recorrido</a>
+      <a href="#lineas">Líneas</a>
+      <a href="#compromisos">Compromisos</a>
+      <a href="#pasos">Pasos</a>
+      <a href="#carta">Carta de acuerdo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="in">
+    <div>
+      <div class="status"><i></i>Propuesta para validar · tras nuestra conversación</div>
+      <h1>De tu mentoría a su <em>primera venta real</em></h1>
+      <p class="lede">Luca, gracias por la conversación que tuvimos. Como quedamos, en Closer Search hemos trabajado la propuesta de colaboración entre los dos y aquí la tienes para que la revises y la valides. Recoge cómo tus alumnos pueden pasar de la mentoría a <b>cerrar ventas en proyectos reales</b>, con dirección comercial y revisión de llamadas, y cómo lo que construyamos puede servir a los dos. Todo está abierto a tus comentarios.</p>
+      <div class="pair"><span>Camino Al Closing</span><span class="x">×</span><span>Closer Search</span></div>
+    </div>
+  </div>
+  <div class="in"><div class="stats">
+    <div><b>7</b><span>líneas de colaboración</span></div>
+    <div><b>60 días</b><span>de piloto para empezar</span></div>
+    <div><b>150+</b><span>perfiles evaluados en nuestra base</span></div>
+    <div><b>0 €</b><span>de cuota fija o pagos por adelantado</span></div>
+  </div></div>
+</section>
+
+<section class="blk" id="encaje">
+  <div class="in">
+    <div class="head rv"><div><span class="k">01 · El encaje</span><h2>Dos piezas que encajan</h2></div><p>En nuestra conversación vimos que tu mentoría y nuestros proyectos se complementan. Tú formas closers; nosotros necesitamos closers bien formados de forma continua.</p></div>
+    <div class="fit rv">
+      <div class="side"><span class="k">Lo que aportas</span><h3>Camino Al Closing</h3><p>Una mentoría en ventas digitales que forma closers, con alumnos <b>listos para trabajar</b> y con ganas de su primera oportunidad real.</p></div>
+      <div class="bridge"><svg viewBox="0 0 72 24" aria-hidden="true"><path d="M2 12h68M58 4l12 8-12 8M14 4 2 12l12 8" fill="none" stroke="#C9A84C" stroke-width="1.5"/></svg>Alianza</div>
+      <div class="side cs"><span class="k">Lo que aportamos</span><h3>Closer Search</h3><p>Montamos y dirigimos <b>equipos de cierre a comisión</b> para infoproductores y negocios digitales de España y Latinoamérica, en español. Seleccionamos con El Filtro de los 6 y solo cobramos cuando se vende.</p></div>
+    </div>
+    <div class="quote rv"><p>Nos ofreciste closers listos para trabajar. Queremos ir un paso más allá: que tus alumnos entren con método y dirección, y que tu trabajo también tenga retorno.</p></div>
+    <ul class="principles rv" aria-label="Principios de la alianza">
+      <li><b>Closer Search, primera vía para tus alumnos</b><span>Nos presentas primero a tus alumnos y nos comprometemos a evaluarlos y responder en un plazo fijo.</span></li>
+      <li><b>Sin coste fijo, todo a negociar</b><span>Ni cuotas ni pagos por adelantado. Las condiciones de cada línea las acordamos juntos, siempre ligadas a resultados.</span></li>
+      <li><b>Primero un piloto</b><span>Empezamos con un grupo pequeño de alumnos durante 60 días y decidimos con datos.</span></li>
+      <li><b>Cada uno en lo suyo</b><span>Tú formas y preseleccionas; nosotros evaluamos, dirigimos y cerramos.</span></li>
+      <li><b>Comunicación veraz</b><span>Nada se anuncia hasta que es cierto, y siempre con textos pactados. Nunca «empleo garantizado».</span></li>
+      <li><b>Un solo interlocutor ante el cliente</b><span>Ante nuestros clientes responde siempre Closer Search.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="blk alt" id="recorrido">
+  <div class="in">
+    <div class="head rv"><div><span class="k">02 · Recorrido del alumno</span><h2>Cómo queda resuelta su formación</h2></div><p>Con la alianza, el recorrido de tus alumnos no acaba al terminar la mentoría. Termina con su primera venta en un proyecto real y un informe de cómo lo han hecho.</p></div>
+    <div class="jlist rv">
+      <div class="jrow"><div class="dot">1</div><div><span class="who ">Camino Al Closing</span><h3>Formación y preselección</h3></div><p>Tu mentoría, tu temario y tu forma de enseñar, sin cambios. Cuando un alumno está listo, nos lo presentas con un role play grabado y el cuestionario de nuestra rúbrica.</p></div>
+      <div class="jrow"><div class="dot">2</div><div><span class="who cs">Closer Search</span><h3>Evaluación con plazo</h3></div><p>Pasa El Filtro de los 6, nuestro método de evaluación, en un plazo fijo desde que nos lo presentas, y te damos la respuesta por escrito.</p></div>
+      <div class="jrow"><div class="dot">3</div><div><span class="who cs">Closer Search</span><h3>Rodaje</h3></div><p>Antes de tocar leads calientes, escucha llamadas reales grabadas y trabaja leads de recuperación, con revisión de sus primeras llamadas.</p></div>
+      <div class="jrow"><div class="dot">4</div><div><span class="who cs">Closer Search</span><h3>Proyecto real</h3></div><p>Entra como setter o como closer en el equipo de cierre de un cliente, con contrato mercantil, guía de ventas del proyecto y dirección comercial.</p></div>
+      <div class="jrow"><div class="dot">5</div><div><span class="who ">Ambas partes</span><h3>Informe</h3></div><p>Te compartimos cómo rinden tus alumnos y en qué puntos fallan, para que puedas reforzarlos en tu mentoría.</p></div>
+    </div>
+    <div class="wins2 rv">
+      <div class="wrow"><span class="k">Para tus alumnos</span><p>Experiencia demostrable en <b>ventas reales de alto valor</b>, con dirección y revisión de llamadas, y una comisión por cada venta que cierran.</p></div>
+      <div class="wrow"><span class="k">Para Camino Al Closing</span><p>Una <b>salida profesional verificable</b> que puedes explicar con los textos que pactemos, datos reales de cómo rinden tus alumnos y retorno por los que funcionan.</p></div>
+      <div class="wrow"><span class="k">Para Closer Search</span><p>Talento formado y preseleccionado para los proyectos de nuestros clientes, con una <b>preparación que ya conocemos</b>.</p></div>
+    </div>
+    <p class="note rv">Las plazas en proyectos dependen de las necesidades reales de nuestros clientes en cada momento. Por eso no comprometemos un número de incorporaciones: nos comprometemos a evaluar a tus alumnos en un plazo fijo y a decirte en otro plazo fijo si hay proyecto para ellos. Si no lo hay, quedan libres. Como trabajamos en España y Latinoamérica, tus alumnos encajan muy bien para cubrir proyectos en Latinoamérica y las tardes y noches de España.</p>
+  </div>
+</section>
+
+<section class="blk" id="lineas">
+  <div class="in">
+    <div class="head rv"><div><span class="k">03 · Líneas de colaboración</span><h2>Siete formas de trabajar juntos</h2></div><p>Estas son las líneas que proponemos tras nuestra conversación. Podemos activar una sola o varias. Todas están abiertas a negociación: dime cuáles te encajan y con qué condiciones, y las recogemos en la carta de acuerdo.</p></div>
+    <div class="lines">
+      <article class="line lead rv"><div class="L">A</div><div><h3>Prácticas en proyectos reales de Closer Search</h3><p style="margin-top:10px">Tus alumnos tienen acceso preferente a El Filtro de los 6, con respuesta en un plazo fijo. Quien lo supera hace un rodaje con llamadas grabadas y entra en el equipo de cierre de un cliente cuando hay plaza, con nuestro método, guía de ventas y seguimiento. Quien destaca pasa a nuestra base de talento estable. Trabajan a comisión, con contrato mercantil y dados de alta en Argentina o en su país.</p></div><span class="neg">A negociar</span></article>
+      <article class="line rv"><div class="top"><div class="L">B</div><span class="neg">A negociar</span></div><h3>Equipo de setters de tarde y noche</h3><p>Una entrada más fácil: tus alumnos empiezan como setters en la franja de tarde y noche de España, que en Argentina es mediodía y tarde, para varios de nuestros clientes a la vez. El paso a closer se gana con datos.</p></article>
+      <article class="line rv"><div class="top"><div class="L">C</div><span class="neg">A negociar</span></div><h3>Empresas que nos presentes</h3><p>Ya hablas con empresas que buscan closers. Cuando una necesite algo más que un perfil (selección, dirección del equipo, guía de ventas o embudo), nos la presentas. Si firma con Closer Search, tienes una compensación y su equipo se monta, en lo posible, con tus alumnos.</p></article>
+      <article class="line rv"><div class="top"><div class="L">D</div><span class="neg">A negociar</span></div><h3>Cerramos las plazas de tu mentoría</h3><p>Si vendes Camino Al Closing por llamada, montamos o reforzamos tu equipo de cierre en cada apertura o de forma continua, con tus mejores alumnos dirigidos por nosotros, practicando con tu propia mentoría.</p></article>
+      <article class="line rv"><div class="top"><div class="L">E</div><span class="neg">A negociar</span></div><h3>Incentivo por los resultados de tus alumnos</h3><p>Durante sus primeros meses en nuestros proyectos, recibes una participación de las ventas que cierren tus alumnos. Ganas cuando ellos rinden, no por colocarlos.</p></article>
+      <article class="line rv"><div class="top"><div class="L">F</div><span class="neg">A negociar</span></div><h3>Role plays, examen práctico y masterclass</h3><p>Sesiones prácticas en directo para tus alumnos, impartidas por Closer Search: role plays con casos reales de cierre, un examen práctico y masterclass para tu comunidad. El temario sigue siendo tuyo.</p></article>
+      <article class="line rv"><div class="top"><div class="L">G</div><span class="neg">A negociar</span></div><h3>Informes de rendimiento y de mejora</h3><p>Cada trimestre, un informe de cómo rinden tus alumnos en proyectos y otro con los puntos en los que más fallan en la evaluación, para que puedas reforzarlos en tu mentoría.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="compromisos">
+  <div class="in">
+    <div class="head rv"><div><span class="k">04 · Cómo trabajaremos</span><h2>Compromisos de cada parte</h2></div><p>Lo que pone cada uno sobre la mesa para que la alianza funcione desde el primer alumno.</p></div>
+    <div class="tw rv"><table>
+      <thead><tr><th></th><th>Camino Al Closing</th><th>Closer Search</th></tr></thead>
+      <tbody>
+        <tr><td>Preselección</td><td>Presenta a los alumnos listos con un role play grabado y el cuestionario de la rúbrica de Closer Search.</td><td>Facilita la rúbrica y hace la evaluación final con El Filtro de los 6.</td></tr>
+        <tr><td>Plazos</td><td>Presenta primero a Closer Search a los alumnos que quieran trabajar en proyectos de cierre.</td><td>Evalúa en un plazo fijo y responde en otro plazo fijo si hay proyecto. Si no lo hay, el alumno queda libre.</td></tr>
+        <tr><td>Rodaje</td><td>Prepara al alumno para escuchar llamadas y trabajar leads de recuperación.</td><td>Da acceso a llamadas grabadas, guía de ventas del cliente y revisión de sus primeras llamadas.</td></tr>
+        <tr><td>Bajas</td><td>Si un alumno abandona en sus primeros 30 días, presenta otro ya preseleccionado.</td><td>Comunica cualquier baja o retirada de un alumno, con sus motivos.</td></tr>
+        <tr><td>Alta y cobro</td><td>Ayuda a sus alumnos con el alta como monotributistas y la factura de exportación de servicios.</td><td>Contrato mercantil con cada alumno, pago en euros por transferencia y una guía clara de alta y cobro.</td></tr>
+        <tr><td>Datos</td><td>Solo comparte datos de alumnos que hayan dado su consentimiento.</td><td>Confidencialidad y protección de datos de los clientes en el contrato de cada alumno. Informes agregados o con consentimiento.</td></tr>
+        <tr><td>Comunicación</td><td>Usa solo los textos pactados sobre Closer Search.</td><td>Usa solo los textos pactados sobre Camino Al Closing.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="req rv"><b>Requisitos para el alumno:</b> mayor de edad, disponibilidad en la franja horaria del proyecto, conexión estable, alta fiscal antes de su primera llamada y contrato mercantil firmado con Closer Search.</p>
+  </div>
+</section>
+
+<section class="blk" id="alcance">
+  <div class="in">
+    <div class="head rv"><div><span class="k">05 · Alcance</span><h2>Qué incluye y qué no</h2></div><p>Para que los dos sepamos desde el principio dónde empieza y dónde acaba la colaboración.</p></div>
+    <div class="scope rv">
+      <div class="sc yes"><h3>Incluye</h3><ul>
+        <li><span><b>Carta de piloto de 60 días</b> con un grupo pequeño de alumnos y las líneas que elijamos.</span></li>
+        <li><span><b>Acuerdo marco de 12 meses</b> tras la revisión del piloto, si funciona para los dos.</span></li>
+        <li><span><b>Closer Search como primera vía</b> de incorporación de tus alumnos, con plazos de respuesta.</span></li>
+        <li><span><b>Revisión conjunta</b> con datos a los 60 días y al final de cada trimestre.</span></li>
+        <li><span><b>Un responsable por cada parte</b> y un canal directo de comunicación.</span></li>
+      </ul></div>
+      <div class="sc no"><h3>No incluye</h3><ul>
+        <li><span>Un número garantizado de incorporaciones o de proyectos.</span></li>
+        <li><span>Certificaciones automáticas o sellos sin evaluación individual.</span></li>
+        <li><span>Acceso de Camino Al Closing a los clientes, guías o informes internos de Closer Search.</span></li>
+        <li><span>Relación laboral con los alumnos: quien trabaja en un proyecto lo hace con contrato mercantil.</span></li>
+        <li><span>Cobros a tus alumnos por acceder a Closer Search o a su evaluación.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="pasos">
+  <div class="in">
+    <div class="head rv"><div><span class="k">06 · Pasos</span><h2>De la conversación al piloto</h2></div><p>Ya dimos el primer paso. Ahora te toca revisar la propuesta; después cerramos condiciones y arrancamos.</p></div>
+    <div class="slist rv">
+      <div class="srow done"><span class="when">Hecho</span><h3>Conversación inicial</h3><p>Una hora hablando de tu mentoría, tus alumnos y nuestros proyectos, en la que quedamos en presentarte esta propuesta.</p></div>
+      <div class="srow now"><span class="when">Ahora</span><h3>Revisas y validas</h3><p>Me dices qué te encaja, qué cambiarías y qué condiciones te parecen justas en cada una de las líneas.</p></div>
+      <div class="srow "><span class="when">Semana 1</span><h3>Cerramos condiciones</h3><p>Ajustamos juntos lo que haga falta y lo dejamos por escrito en la carta de piloto.</p></div>
+      <div class="srow "><span class="when">Semana 1-2</span><h3>Tres perfiles de prueba</h3><p>Me pasas tres alumnos con su role play grabado, los evaluamos y te respondemos por escrito.</p></div>
+      <div class="srow "><span class="when">Días 1-60</span><h3>Piloto</h3><p>De tres a cinco alumnos hacen su rodaje y, si hay plaza, entran como setters o closers en un proyecto real.</p></div>
+      <div class="srow "><span class="when">Día 60</span><h3>Revisión con datos</h3><p>Repasamos alumnos evaluados, ventas, tasa de cierre y satisfacción de los clientes, y con eso decidimos el acuerdo de 12 meses.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="despues">
+  <div class="in">
+    <div class="head rv"><div><span class="k">07 · Más adelante</span><h2>Hasta dónde puede llegar</h2></div><p>Vías que tienen sentido cuando el piloto funcione. Las dejamos planteadas para que veas el recorrido de la alianza. También a negociar.</p></div>
+    <div class="later">
+      <div class="lt big rv"><span class="k">Tu mentoría bajo el paraguas de Closer Search</span><h3>Formación recomendada en www.closersearch.com</h3><p>Camino Al Closing aparece en <b>www.closersearch.com</b> como formación recomendada, con la parte práctica y la evaluación de Closer Search y la relación entre las dos marcas explicada con claridad. Te presentamos a candidatos de nuestra comunidad que todavía no superan la evaluación.</p></div>
+      <div class="lt rv"><span class="k">Producto conjunto</span><h3>Bootcamp práctico</h3><p>Dos semanas de role plays con casos reales y examen práctico para quien termina tu mentoría.</p></div>
+      <div class="lt rv"><span class="k">Operativa</span><h3>Closers de reserva</h3><p>Alumnos ya evaluados y formados en la guía de un cliente, listos para cubrir bajas o lanzamientos.</p></div>
+      <div class="lt rv"><span class="k">Mercado</span><h3>Equipos para Latinoamérica</h3><p>Si nos presentas infoproductores de la región que venden por llamada, montamos su equipo con tus alumnos, en su huso horario.</p></div>
+      <div class="lt rv"><span class="k">Contenido</span><h3>Directo conjunto</h3><p>Cuando haya ventas reales, un directo tuyo y de David contando el caso con cifras verificadas.</p></div>
+      <div class="lt rv"><span class="k">Evento</span><h3>La Gran Sala</h3><p>Camino Al Closing como academia invitada en la edición de talento de nuestro evento digital, con evaluación en directo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="carta">
+  <div class="in letter">
+    <div class="rv"><span class="k">08 · Carta de acuerdo</span><h2 style="font-size:clamp(34px,5vw,56px);line-height:1.02;margin:12px 0 18px">La carta que proponemos</h2>
+    <p class="agnote">Esta es la carta para empezar con un piloto de 60 días. Los campos resaltados se completan con tus datos y con las condiciones que cerremos cuando valides la propuesta. Una vez cerrada, te la envío en PDF editable para firmar.</p></div>
+    <article class="agreement rv">
+      <p class="t">Carta de acuerdo de colaboración</p>
+      <p class="s">Closer Search × Camino Al Closing</p>
+      <p>En <span class="ph" data-p="[ciudad]"></span>, a <span class="ph" data-p="[fecha]"></span>.</p>
+      <h4>Reunidos</h4>
+      <p>De una parte, David Martínez Varés, en nombre y representación de Closer Search Consulting SL, con CIF B-05735493 y domicilio en Calle Còrsega 108-110, 4º-4ª, 08029 Barcelona, en calidad de administrador único (en adelante, «Closer Search»).</p>
+      <p>De otra parte, Luca Juárez, con documento de identidad <span class="ph" data-p="[DNI]"></span>, en su propio nombre o en representación de <span class="ph" data-p="[razón social, si la hay]"></span>, con CUIT <span class="ph" data-p="[CUIT]"></span> y domicilio en <span class="ph" data-p="[domicilio], Argentina"></span>, que opera bajo la marca Camino Al Closing (en adelante, «Camino Al Closing»).</p>
+      <p>Ambas partes se reconocen capacidad suficiente para firmar esta carta de acuerdo y</p>
+      <h4>Exponen</h4>
+      <ol>
+        <li>Que Closer Search se dedica a la selección, formación práctica y dirección de equipos comerciales de cierre para la venta de productos y servicios de alto valor.</li>
+        <li>Que Camino Al Closing imparte la mentoría en ventas digitales «Camino Al Closing», dirigida a la formación de closers.</li>
+        <li>Que, tras una primera conversación, ambas partes desean colaborar en los términos siguientes.</li>
+      </ol>
+      <h4>Acuerdan</h4>
+      <p class="cl"><b>1. Objeto.</b> Establecer una colaboración en las líneas que las partes activen: (A) prácticas en proyectos reales de Closer Search; (B) equipo de setters de tarde y noche; (C) empresas presentadas por Camino Al Closing; (D) cierre de las plazas de la mentoría; (E) incentivo por resultados de los alumnos; (F) role plays, examen práctico y masterclass; y (G) informes de rendimiento y de mejora. Líneas activadas: <span class="ph" data-p="[indicar letras]"></span>.</p>
+      <p class="cl"><b>2. Piloto.</b> La colaboración empieza con un piloto de 60 días con un máximo de <span class="ph" data-p="[5]"></span> alumnos. Al terminar, las partes revisarán los resultados y decidirán si firman un acuerdo marco de 12 meses.</p>
+      <p class="cl"><b>3. Incorporación a través de Closer Search.</b> Durante la vigencia de esta carta, Camino Al Closing presentará primero a Closer Search a los alumnos que deseen trabajar en proyectos de cierre. Closer Search evaluará a cada alumno presentado en un plazo máximo de <span class="ph" data-p="[10]"></span> días hábiles y comunicará por escrito, en un plazo máximo de <span class="ph" data-p="[15]"></span> días desde la evaluación, si le ofrece incorporarse a un proyecto. Si no hay respuesta en plazo o no hay proyecto, el alumno queda libre. Esta obligación no impide a Camino Al Closing impartir su formación a quien desee.</p>
+      <p class="cl"><b>4. Evaluación y acceso a proyectos.</b> Superar la evaluación de Closer Search (El Filtro de los 6) da acceso a su base de talento, nunca una plaza automática. La incorporación a un proyecto depende de las necesidades reales de los clientes de Closer Search, que no garantiza un número de incorporaciones ni de proyectos.</p>
+      <p class="cl"><b>5. Relación con los alumnos.</b> Los alumnos que trabajen en proyectos de Closer Search lo harán mediante contrato mercantil firmado directamente con Closer Search, siendo mayores de edad y estando de alta en el régimen que corresponda en su país de residencia. El contrato incluirá confidencialidad, no captación y las obligaciones de encargado del tratamiento sobre los datos de los clientes. No existe relación laboral ni de prácticas académicas entre el alumno y Closer Search, ni relación contractual entre el alumno y los clientes de Closer Search. Camino Al Closing no cobrará a sus alumnos por acceder a Closer Search ni a su evaluación.</p>
+      <p class="cl"><b>6. Preselección y reposición.</b> Camino Al Closing presentará a cada alumno con un role play grabado y el cuestionario facilitado por Closer Search. Si un alumno incorporado abandona en sus primeros 30 días por causa no imputable a Closer Search, Camino Al Closing presentará otro candidato preseleccionado.</p>
+      <p class="cl"><b>7. Compensaciones.</b> Las condiciones económicas de cada línea activada son las siguientes: (A) <span class="ph" data-p="[a negociar]"></span>; (B) <span class="ph" data-p="[a negociar]"></span>; (C) <span class="ph" data-p="[a negociar]"></span>; (D) <span class="ph" data-p="[a negociar]"></span>; (E) <span class="ph" data-p="[a negociar]"></span>; (F) <span class="ph" data-p="[a negociar]"></span>; (G) <span class="ph" data-p="[a negociar]"></span>. Las comisiones se devengan con cada venta cerrada, con independencia de la forma de pago del comprador, y se liquidan <span class="ph" data-p="[mensualmente]"></span> contra factura, en euros, por transferencia internacional. En la línea D, si el comprador de la mentoría ejerce su derecho de desistimiento o una garantía de devolución, la comisión correspondiente se devolverá.</p>
+      <p class="cl"><b>8. Comunicación y uso de marca.</b> Las partes solo usarán los textos pactados en el anexo de comunicación al referirse a la otra. Cualquier otro uso del nombre, la marca o el logotipo de la otra parte requiere aprobación previa y por escrito. Camino Al Closing no asociará a Closer Search con expresiones como «empleo garantizado», «colocación asegurada» ni con cifras de ingresos de sus alumnos. El incumplimiento de esta cláusula es causa de resolución inmediata.</p>
+      <p class="cl"><b>9. No captación.</b> Durante la vigencia de esta carta y los 12 meses siguientes, ninguna parte contactará con fines comerciales a los clientes, closers o colaboradores que haya conocido a través de la otra, salvo autorización escrita.</p>
+      <p class="cl"><b>10. Confidencialidad.</b> Las partes guardarán confidencialidad sobre la información comercial, económica y de clientes que intercambien, durante la vigencia de esta carta y dos años después.</p>
+      <p class="cl"><b>11. Protección de datos.</b> Cada parte es responsable de los datos personales que trate. Camino Al Closing solo comunicará a Closer Search datos de alumnos que hayan dado su consentimiento. Closer Search compartirá con Camino Al Closing información de rendimiento de forma agregada, o individual solo con consentimiento del alumno, conforme al Reglamento (UE) 2016/679 y a la Ley Orgánica 3/2018.</p>
+      <p class="cl"><b>12. Responsable ante el cliente.</b> Ante los clientes de Closer Search responde únicamente Closer Search.</p>
+      <p class="cl"><b>13. Duración.</b> Esta carta dura 60 días desde la firma. Cualquiera de las partes puede resolverla antes con 15 días de preaviso. Las comisiones devengadas antes de la resolución se mantienen.</p>
+      <p class="cl"><b>14. Ley y resolución de conflictos.</b> Esta carta se rige por la ley española. Ante cualquier controversia, las partes intentarán primero una mediación. Si no se resuelve, se someten a los juzgados y tribunales de <span class="ph" data-p="[Barcelona]"></span>.</p>
+      <p>Y en prueba de conformidad, firman la presente carta de acuerdo en el lugar y la fecha indicados.</p>
+      <div class="sign">
+        <div><b>Por Closer Search</b>David Martínez Varés<br>Administrador único · Closer Search Consulting SL</div>
+        <div><b>Por Camino Al Closing</b>Luca Juárez<br>Creador de Camino Al Closing</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="close" id="siguiente">
+  <div class="in">
+    <div class="rv">
+      <span class="k">El siguiente paso</span>
+      <h2 style="margin-top:14px">Tu turno, <em>Luca</em></h2>
+      <p>Revisa la propuesta con calma y dime qué te encaja y qué cambiarías. Si quieres, la repasamos juntos en una llamada corta por Meet antes de cerrar la carta de piloto.</p>
+    </div>
+    <div class="card rv">
+      <span class="k">Contacto</span>
+      <div class="name">David Martínez-Bayer</div>
+      <div class="role">CEO y Fundador de Closer Search</div>
+      <span class="ln">david@closersearch.com</span>
+      <span class="ln">+34 663 347 696</span>
+      <a class="ln" href="https://www.closersearch.com" target="_blank" rel="noopener">www.closersearch.com ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="in"><span>Closer Search Consulting SL · Barcelona</span><span>Propuesta confidencial para validar · Camino Al Closing · Octubre de 2026</span></div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // aparición suave: los bloques fuera de pantalla arrancan casi visibles y se asientan al entrar
+  if(!reduce&&'IntersectionObserver' in window){
+    root.classList.add('js');
+    var els=[].slice.call(document.querySelectorAll('.rv'));
+    var vh=window.innerHeight||800;
+    els.forEach(function(el){if(el.getBoundingClientRect().top>vh*0.92)el.classList.add('pre');});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }
+  // marca la sección activa en la barra
+  var links=[].slice.call(document.querySelectorAll('.bar nav a'));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+  function onScroll(){
+    var y=window.scrollY+120,cur=-1;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+
+</body>
+</html>
